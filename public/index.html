@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lingua – Online Language Translator</title>
+  <meta name="description" content="Translate text between more than 40 languages instantly." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%232563eb'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EL%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Lingua home">
+      <span class="brand-mark" aria-hidden="true">L</span>
+      <span class="brand-name">Lingua</span>
+    </a>
+    <span class="provider-pill" id="providerPill" hidden></span>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <h1>Say it in any language</h1>
+      <p>Paste or type your text, pick a language, and get an instant translation.</p>
+    </section>
+
+    <section class="translator" aria-label="Translator">
+      <!-- Language bar -->
+      <div class="lang-bar">
+        <div class="select-wrap">
+          <label for="sourceLang" class="sr-only">Translate from</label>
+          <select id="sourceLang"></select>
+        </div>
+
+        <button id="swapBtn" class="icon-btn swap" type="button" title="Swap languages" aria-label="Swap languages">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/></svg>
+        </button>
+
+        <div class="select-wrap">
+          <label for="targetLang" class="sr-only">Translate to</label>
+          <select id="targetLang"></select>
+        </div>
+      </div>
+
+      <!-- Panels -->
+      <div class="panels">
+        <div class="panel" id="inputPanel">
+          <label for="inputText" class="sr-only">Text to translate</label>
+          <textarea id="inputText" placeholder="Type or paste text here…" maxlength="5000" spellcheck="true"></textarea>
+          <div class="panel-foot">
+            <span class="counter" id="charCount">0 / 5000</span>
+            <div class="actions">
+              <button id="clearBtn" class="ghost-btn" type="button">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel output" id="outputPanel">
+          <div class="output-text" id="outputText" role="status" aria-live="polite" tabindex="0">
+            <span class="placeholder">Your translation appears here.</span>
+          </div>
+          <div class="loader" id="loader" hidden aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>Translating…</em>
+          </div>
+          <div class="panel-foot">
+            <span class="detected" id="detectedInfo"></span>
+            <div class="actions">
+              <button id="speakBtn" class="ghost-btn" type="button" disabled>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+                Listen
+              </button>
+              <button id="copyBtn" class="ghost-btn" type="button" disabled>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <span id="copyLabel">Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error + submit -->
+      <div class="error" id="errorBox" role="alert" hidden></div>
+
+      <div class="submit-row">
+        <span class="hint">Tip: press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to translate</span>
+        <button id="translateBtn" class="primary-btn" type="button">Translate</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Lingua · Translations are machine-generated; double-check anything important.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
